@@ -107,7 +107,15 @@ public class Calculator implements ActionListener {
         }
 
         if (e.getSource() == addButton) {
-            num1 = Double.parseDouble(textfield.getText());
+            num2 = num1;
+
+            if (operator == '=') {
+                num1 = 0;
+            } else {
+                num1 = Double.parseDouble(textfield.getText());
+            }
+
+            num1 = num2 + num1;
             operator = '+';
             textfield.setText("");
         }
@@ -136,7 +144,8 @@ public class Calculator implements ActionListener {
         }
 
         if (e.getSource() == equButton) {
-            num2 = Double.parseDouble(textfield.getText());
+            num2 = num1;
+            num1 = Double.parseDouble(textfield.getText());
 
             switch (operator) {
                 case '+' -> result = num1 + num2;
@@ -147,6 +156,7 @@ public class Calculator implements ActionListener {
 
             textfield.setText(String.valueOf(result));
             num1 = result;
+            operator = '=';
         }
 
         if (e.getSource() == clrButton) {
