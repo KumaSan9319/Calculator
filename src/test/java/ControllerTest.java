@@ -47,4 +47,64 @@ public class ControllerTest {
 
   }
 
+  @Test
+  void testOperatorScenario1() {
+    // In deze eerste test gaan we kijken wat er gebeurt als je herhaaldelijk op een operator knop
+    // blijft drukken zonder extra input te geven
+    Controller controller = new Controller();
+
+    controller.getNumPad().setInput("14");
+
+    controller.selectOperator('+');
+    controller.selectOperator('+');
+    controller.selectOperator('+');
+    controller.selectOperator('*');
+    controller.selectOperator('-');
+
+    // Omdat de selectOperator de input omzet naar currentValue als die leeg is verwachten we hier
+    // een currentValue van 14
+    Assertions.assertEquals("14", controller.getNumPad().getCurrentValue());
+  }
+
+  @Test
+  void testOperatorScenario2() {
+    // In deze test kijken we of je correct door kan rekenen met nieuwe input waardes zonder
+    // tussendoor op '=' te hoeven drukken.
+    Controller controller = new Controller();
+
+    controller.getNumPad().setInput("14");
+    controller.selectOperator('+');
+    controller.getNumPad().setInput("7");
+    controller.selectOperator('+');
+    controller.selectOperator('+');
+
+    controller.selectOperator('+');
+    controller.getNumPad().setInput("7");
+    controller.selectOperator('+');
+    controller.selectOperator('+');
+
+    // Omdat we bij twee berekeningen een input van 7 meegeven en de rekenmachine de andere +
+    // inputs zou moeten negeren verwachten we hier een antwoord van 28
+    Assertions.assertEquals("28.0", controller.getNumPad().getCurrentValue());
+  }
+
+  @Test
+  void testOperatorScenario3() {
+    // Hier testen we of de equals methode de ingevoerde input en operator onthoudt en je zoals
+    // in moderne calculator apps op '=' kan blijven drukken om de vorige berekening te blijven
+    // herhalen
+    Controller controller = new Controller();
+
+    controller.getNumPad().setInput("14");
+    controller.selectOperator('+');
+    controller.getNumPad().setInput("7");
+
+    controller.equals();
+    controller.equals();
+    controller.equals();
+
+    // Omdat we de berekening drie keer uitvoeren verwachten we hier een resultaat van 35
+    Assertions.assertEquals("35.0", controller.getNumPad().getCurrentValue());
+  }
+
 }
