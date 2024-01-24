@@ -3,18 +3,18 @@ package nl.kuma.calculator.calculator;
 public class NumPad {
 
   /**
-   *   input is het getal wat op de rekenmachine zichtbaar is en momenteel aangevuld kan worden met
-   *   button inputs.
+   * Input is het getal wat op de rekenmachine zichtbaar is en momenteel aangevuld kan worden met
+   * button inputs.
    */
   private String input = "";
   /**
-   *    currentValue is het getal wat de rekenmachine onthoudt nadat er een operator
-   *    knop is ingedrukt en waarop de berekening toepassing gaat hebben.
+   * currentValue is het getal wat de rekenmachine onthoudt nadat er een operator
+   * knop is ingedrukt en waarop de berekening toepassing gaat hebben.
    */
   private String currentValue = "";
   /**
-   *    currentOperator wordt ingevuld wanneer er op de rekenmachine op de +, -, *, of / knop
-   *    wordt gedrukt.
+   * currentOperator wordt ingevuld wanneer er op de rekenmachine op de +, -, *, of / knop
+   * wordt gedrukt.
    */
   private String currentOperator = "";
 
@@ -43,9 +43,10 @@ public class NumPad {
   }
 
   /**
-   *    inputDigit is de method die wordt aangeroepen wanneer er een knop op de rekenmachine wordt
-   *    ingedrukt met een getal of de komma erop.
-   *    @param digit
+   * inputDigit is de method die wordt aangeroepen wanneer er een knop op de rekenmachine wordt
+   * ingedrukt met een getal of de komma erop.
+   *
+   * @param digit
    */
   public void inputDigit(String digit) {
     if (!digit.equals(".") || (digit.equals(".") && !input.contains("."))) {
@@ -54,8 +55,8 @@ public class NumPad {
   }
 
   /**
-   *   backspace verwijdert de laatste digit in input wanneer de backspace knop op de rekenmachine
-   *   wordt ingedrukt
+   * Backspace verwijdert de laatste digit in input wanneer de backspace knop op de rekenmachine
+   * wordt ingedrukt
    */
   public void backspace() {
     if (input.isEmpty()) {
