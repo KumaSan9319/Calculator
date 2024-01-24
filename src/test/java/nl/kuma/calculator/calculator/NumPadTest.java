@@ -1,4 +1,5 @@
-import Calculator.NumPad;
+package nl.kuma.calculator.calculator;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -38,22 +39,18 @@ public class NumPadTest {
   }
 
   @Test
-  void testCReset() {
-    // test object maken
+  void testDecimal() {
     NumPad testNumPad = new NumPad();
 
-    // waardes aanmaken om cReset mee te testen
-    testNumPad.setInput("12345");
-    testNumPad.setCurrentValue("6789");
-    testNumPad.setCurrentOperator('+');
+    testNumPad.inputDigit("1");
+    testNumPad.inputDigit("2");
+    testNumPad.inputDigit("3");
+    testNumPad.inputDigit(".");
+    testNumPad.inputDigit("5");
+    testNumPad.inputDigit(".");
+    testNumPad.inputDigit("5");
 
-    // test cReset
-    testNumPad.cReset();
-
-    // output van method vergelijken met verwachte resultaten
-    Assertions.assertEquals("", testNumPad.getInput());
-    Assertions.assertEquals("", testNumPad.getCurrentValue());
-    Assertions.assertEquals(' ', testNumPad.getCurrentOperator());
+    Assertions.assertEquals("123.55", testNumPad.getInput());
   }
 
 }

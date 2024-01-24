@@ -1,4 +1,5 @@
-import Calculator.Controller;
+package nl.kuma.calculator.calculator;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -15,22 +16,22 @@ public class ControllerTest {
 
     // test waarden vaststellen en te testen method uitvoeren
     test1.getNumPad().setCurrentValue("22");
-    test1.getNumPad().setCurrentOperator('+');
+    test1.getNumPad().setCurrentOperator("+");
     test1.getNumPad().setInput("7");
     test1.equals();
 
     test2.getNumPad().setCurrentValue("22");
-    test2.getNumPad().setCurrentOperator('-');
+    test2.getNumPad().setCurrentOperator("-");
     test2.getNumPad().setInput("7");
     test2.equals();
 
     test3.getNumPad().setCurrentValue("22");
-    test3.getNumPad().setCurrentOperator('*');
+    test3.getNumPad().setCurrentOperator("*");
     test3.getNumPad().setInput("7");
     test3.equals();
 
     test4.getNumPad().setCurrentValue("22");
-    test4.getNumPad().setCurrentOperator('/');
+    test4.getNumPad().setCurrentOperator("/");
     test4.getNumPad().setInput("2");
     test4.equals();
 
@@ -55,11 +56,11 @@ public class ControllerTest {
 
     controller.getNumPad().setInput("14");
 
-    controller.selectOperator('+');
-    controller.selectOperator('+');
-    controller.selectOperator('+');
-    controller.selectOperator('*');
-    controller.selectOperator('-');
+    controller.selectOperator("+");
+    controller.selectOperator("+");
+    controller.selectOperator("+");
+    controller.selectOperator("*");
+    controller.selectOperator("-");
 
     // Omdat de selectOperator de input omzet naar currentValue als die leeg is verwachten we hier
     // een currentValue van 14
@@ -73,15 +74,15 @@ public class ControllerTest {
     Controller controller = new Controller();
 
     controller.getNumPad().setInput("14");
-    controller.selectOperator('+');
+    controller.selectOperator("+");
     controller.getNumPad().setInput("7");
-    controller.selectOperator('+');
-    controller.selectOperator('+');
+    controller.selectOperator("+");
+    controller.selectOperator("+");
 
-    controller.selectOperator('+');
+    controller.selectOperator("+");
     controller.getNumPad().setInput("7");
-    controller.selectOperator('+');
-    controller.selectOperator('+');
+    controller.selectOperator("+");
+    controller.selectOperator("+");
 
     // Omdat we bij twee berekeningen een input van 7 meegeven en de rekenmachine de andere +
     // inputs zou moeten negeren verwachten we hier een antwoord van 28
@@ -96,7 +97,7 @@ public class ControllerTest {
     Controller controller = new Controller();
 
     controller.getNumPad().setInput("14");
-    controller.selectOperator('+');
+    controller.selectOperator("+");
     controller.getNumPad().setInput("7");
 
     controller.equals();
@@ -105,6 +106,25 @@ public class ControllerTest {
 
     // Omdat we de berekening drie keer uitvoeren verwachten we hier een resultaat van 35
     Assertions.assertEquals("35.0", controller.getNumPad().getCurrentValue());
+  }
+
+  @Test
+  void testCReset() {
+    // test object maken
+    Controller testController = new Controller();
+
+    // waardes aanmaken om cReset mee te testen
+    testController.getNumPad().setInput("12345");
+    testController.getNumPad().setCurrentValue("6789");
+    testController.getNumPad().setCurrentOperator("+");
+
+    // test cReset
+    testController.cReset();
+
+    // output van method vergelijken met verwachte resultaten
+    Assertions.assertEquals("", testController.getNumPad().getInput());
+    Assertions.assertEquals("", testController.getNumPad().getCurrentValue());
+    Assertions.assertEquals("", testController.getNumPad().getCurrentOperator());
   }
 
 }
