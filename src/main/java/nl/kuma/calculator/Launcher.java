@@ -11,7 +11,6 @@ public class Launcher {
       @Override
       public void run() {
         CalculatorWindow main = new CalculatorWindow();
-
       }
     });
 

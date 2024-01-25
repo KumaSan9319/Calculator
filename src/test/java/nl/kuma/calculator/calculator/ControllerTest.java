@@ -8,43 +8,46 @@ public class ControllerTest {
   @Test
   void testEquals() {
     // test objecten maken
-    Controller test1 = new Controller();
-    Controller test2 = new Controller();
-    Controller test3 = new Controller();
-    Controller test4 = new Controller();
-    Controller test5 = new Controller();
+    Controller controller = Controller.getControllerInstance();
 
     // test waarden vaststellen en te testen method uitvoeren
-    test1.getNumPad().setCurrentValue("22");
-    test1.getNumPad().setCurrentOperator("+");
-    test1.getNumPad().setInput("7");
-    test1.equals();
+    controller.getNumPad().setCurrentValue("22");
+    controller.getNumPad().setCurrentOperator("+");
+    controller.getNumPad().setInput("7");
+    controller.equals();
 
-    test2.getNumPad().setCurrentValue("22");
-    test2.getNumPad().setCurrentOperator("-");
-    test2.getNumPad().setInput("7");
-    test2.equals();
+    Assertions.assertEquals("29.0", controller.getNumPad().getCurrentValue());
+    controller.cReset();
 
-    test3.getNumPad().setCurrentValue("22");
-    test3.getNumPad().setCurrentOperator("*");
-    test3.getNumPad().setInput("7");
-    test3.equals();
+    controller.getNumPad().setCurrentValue("22");
+    controller.getNumPad().setCurrentOperator("-");
+    controller.getNumPad().setInput("7");
+    controller.equals();
 
-    test4.getNumPad().setCurrentValue("22");
-    test4.getNumPad().setCurrentOperator("/");
-    test4.getNumPad().setInput("2");
-    test4.equals();
+    Assertions.assertEquals("15.0", controller.getNumPad().getCurrentValue());
+    controller.cReset();
 
-    test5.getNumPad().setCurrentValue("22");
-    test5.getNumPad().setInput("7");
-    test5.equals();
+    controller.getNumPad().setCurrentValue("22");
+    controller.getNumPad().setCurrentOperator("*");
+    controller.getNumPad().setInput("7");
+    controller.equals();
 
-    // Assertions
-    Assertions.assertEquals("29.0", test1.getNumPad().getCurrentValue());
-    Assertions.assertEquals("15.0", test2.getNumPad().getCurrentValue());
-    Assertions.assertEquals("154.0", test3.getNumPad().getCurrentValue());
-    Assertions.assertEquals("11.0", test4.getNumPad().getCurrentValue());
-    Assertions.assertEquals("7.0", test5.getNumPad().getCurrentValue());
+    Assertions.assertEquals("154.0", controller.getNumPad().getCurrentValue());
+    controller.cReset();
+
+    controller.getNumPad().setCurrentValue("22");
+    controller.getNumPad().setCurrentOperator("/");
+    controller.getNumPad().setInput("2");
+    controller.equals();
+
+    Assertions.assertEquals("11.0", controller.getNumPad().getCurrentValue());
+    controller.cReset();
+
+    controller.getNumPad().setCurrentValue("22");
+    controller.getNumPad().setInput("7");
+    controller.equals();
+
+    Assertions.assertEquals("7.0", controller.getNumPad().getCurrentValue());
 
   }
 
@@ -52,7 +55,7 @@ public class ControllerTest {
   void testOperatorScenario1() {
     // In deze eerste test gaan we kijken wat er gebeurt als je herhaaldelijk op een operator knop
     // blijft drukken zonder extra input te geven
-    Controller controller = new Controller();
+    Controller controller = Controller.getControllerInstance();
 
     controller.getNumPad().setInput("14");
 
@@ -71,7 +74,7 @@ public class ControllerTest {
   void testOperatorScenario2() {
     // In deze test kijken we of je correct door kan rekenen met nieuwe input waardes zonder
     // tussendoor op '=' te hoeven drukken.
-    Controller controller = new Controller();
+    Controller controller = Controller.getControllerInstance();
 
     controller.getNumPad().setInput("14");
     controller.selectOperator("+");
@@ -94,7 +97,7 @@ public class ControllerTest {
     // Hier testen we of de equals methode de ingevoerde input en operator onthoudt en je zoals
     // in moderne calculator apps op '=' kan blijven drukken om de vorige berekening te blijven
     // herhalen
-    Controller controller = new Controller();
+    Controller controller = Controller.getControllerInstance();
 
     controller.getNumPad().setInput("14");
     controller.selectOperator("+");
@@ -111,7 +114,7 @@ public class ControllerTest {
   @Test
   void testCReset() {
     // test object maken
-    Controller testController = new Controller();
+    Controller testController = Controller.getControllerInstance();
 
     // waardes aanmaken om cReset mee te testen
     testController.getNumPad().setInput("12345");

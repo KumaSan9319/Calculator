@@ -3,7 +3,7 @@ package nl.kuma.calculator.calculator;
 public class Controller {
 
   private NumPad numPad;
-  private static Controller instance;
+  private static Controller controllerInstance;
 
   private Controller() {
     this.numPad = new NumPad();
@@ -20,12 +20,12 @@ public class Controller {
    *
    * @return
    */
-  public static Controller getInstance() {
-    if (instance == null) {
-      instance = new Controller();
+  public static Controller getControllerInstance() {
+    if (controllerInstance == null) {
+      controllerInstance = new Controller();
     }
 
-    return instance;
+    return controllerInstance;
   }
 
   /**
