@@ -57,7 +57,8 @@ public class ControllerTest {
     // blijft drukken zonder extra input te geven
     Controller controller = Controller.getControllerInstance();
 
-    controller.getNumPad().setInput("14");
+    controller.getNumPad().inputDigit("1");
+    controller.getNumPad().inputDigit("4");
 
     controller.selectOperator("+");
     controller.selectOperator("+");
@@ -76,14 +77,15 @@ public class ControllerTest {
     // tussendoor op '=' te hoeven drukken.
     Controller controller = Controller.getControllerInstance();
 
-    controller.getNumPad().setInput("14");
+    controller.getNumPad().inputDigit("1");
+    controller.getNumPad().inputDigit("4");
     controller.selectOperator("+");
-    controller.getNumPad().setInput("7");
+    controller.getNumPad().inputDigit("7");
     controller.selectOperator("+");
     controller.selectOperator("+");
 
     controller.selectOperator("+");
-    controller.getNumPad().setInput("7");
+    controller.getNumPad().inputDigit("7");
     controller.selectOperator("+");
     controller.selectOperator("+");
 
@@ -99,9 +101,10 @@ public class ControllerTest {
     // herhalen
     Controller controller = Controller.getControllerInstance();
 
-    controller.getNumPad().setInput("14");
+    controller.getNumPad().inputDigit("1");
+    controller.getNumPad().inputDigit("4");
     controller.selectOperator("+");
-    controller.getNumPad().setInput("7");
+    controller.getNumPad().inputDigit("7");
 
     controller.equals();
     controller.equals();
@@ -128,6 +131,24 @@ public class ControllerTest {
     Assertions.assertEquals("", testController.getNumPad().getInput());
     Assertions.assertEquals("", testController.getNumPad().getCurrentValue());
     Assertions.assertEquals("", testController.getNumPad().getCurrentOperator());
+  }
+
+  @Test
+  void testOutputBug() {
+    Controller testController = Controller.getControllerInstance();
+
+    testController.getNumPad().inputDigit("2");
+    testController.selectOperator("+");
+    testController.getNumPad().inputDigit("2");
+    testController.equals();
+
+    Assertions.assertEquals("4.0", testController.getNumPad().getCurrentValue());
+
+    testController.selectOperator("+");
+    testController.getNumPad().inputDigit("2");
+    testController.equals();
+
+    Assertions.assertEquals("6.0", testController.getNumPad().getCurrentValue());
   }
 
 }
