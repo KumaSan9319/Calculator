@@ -42,16 +42,8 @@ public class Controller {
    */
   public void selectOperator(String operatorInput) {
     numPad.setCurrentOperator(operatorInput);
-
-    if (numPad.getCurrentValue().isEmpty()) {
-      numPad.setCurrentValue(numPad.getInput());
-      numPad.setInput("");
-    } else if (numPad.getInput().isEmpty()) {
-
-    } else {
-      equals();
-      numPad.setInput("");
-    }
+    equals();
+    numPad.getInput().setLength(0);
   }
 
   /**
@@ -59,8 +51,8 @@ public class Controller {
    * de ingevulde waardes.
    */
   public void equals() {
-    double parsedCurrentValue = Double.parseDouble(numPad.getCurrentValue());
-    double parsedInput = Double.parseDouble(numPad.getInput());
+    double parsedCurrentValue = numPad.getCurrentValue();
+    double parsedInput = Double.parseDouble(numPad.getInput().toString());
 
     double sum = switch(numPad.getCurrentOperator()) {
       case "+" -> parsedCurrentValue + parsedInput;
@@ -70,7 +62,7 @@ public class Controller {
       default -> parsedInput;
     };
 
-    numPad.setCurrentValue(Double.toString(sum));
+    numPad.setCurrentValue(sum);
   }
 
   /**

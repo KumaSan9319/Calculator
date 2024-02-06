@@ -6,23 +6,23 @@ public class NumPad {
    * Input is het getal wat op de rekenmachine zichtbaar is en momenteel aangevuld kan worden met
    * button inputs.
    */
-  private String input = "";
+  private StringBuilder input = new StringBuilder();
   /**
    * currentValue is het getal wat de rekenmachine onthoudt nadat er een operator
    * knop is ingedrukt en waarop de berekening toepassing gaat hebben.
    */
-  private String currentValue = "";
+  private double currentValue = 0;
   /**
    * currentOperator wordt ingevuld wanneer er op de rekenmachine op de +, -, *, of / knop
    * wordt gedrukt.
    */
   private String currentOperator = "";
 
-  public String getInput() {
+  public StringBuilder getInput() {
     return input;
   }
 
-  public String getCurrentValue() {
+  public double getCurrentValue() {
     return currentValue;
   }
 
@@ -30,11 +30,11 @@ public class NumPad {
     return currentOperator;
   }
 
-  public void setInput(String input) {
+  public void setInput(StringBuilder input) {
     this.input = input;
   }
 
-  public void setCurrentValue(String currentValue) {
+  public void setCurrentValue(double currentValue) {
     this.currentValue = currentValue;
   }
 
@@ -49,8 +49,8 @@ public class NumPad {
    * @param digit
    */
   public void inputDigit(String digit) {
-    if (!digit.equals(".") || (digit.equals(".") && !input.contains("."))) {
-      input = input.concat(digit);
+    if (!digit.equals(".") || (digit.equals(".") && !input.toString().contains("."))) {
+      input.append(digit);
     }
   }
 
@@ -62,7 +62,7 @@ public class NumPad {
     if (input.isEmpty()) {
 
     } else {
-      input = input.substring(0, input.length() - 1);
+      input.setLength(input.length() - 1);
     }
   }
 

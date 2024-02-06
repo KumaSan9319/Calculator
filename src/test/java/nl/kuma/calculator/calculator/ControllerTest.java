@@ -11,7 +11,7 @@ public class ControllerTest {
     Controller controller = Controller.getControllerInstance();
 
     // test waarden vaststellen en te testen method uitvoeren
-    controller.getNumPad().setCurrentValue("22");
+    controller.getNumPad().setCurrentValue(22);
     controller.getNumPad().setCurrentOperator("+");
     controller.getNumPad().setInput("7");
     controller.equals();

@@ -24,11 +24,11 @@ public class CalculatorTextField extends JTextField {
   }
 
   public void updateField() {
-    this.setText(controller.getNumPad().getInput());
+    this.setText(controller.getNumPad().getInput().toString());
   }
 
   public void updateFieldEquals() {
-    this.setText(controller.getNumPad().getCurrentValue());
+    this.setText(Double.toString(controller.getNumPad().getCurrentValue()));
   }
 
 }
