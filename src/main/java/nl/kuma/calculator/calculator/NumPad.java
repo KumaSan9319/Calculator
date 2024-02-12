@@ -1,11 +1,16 @@
 package nl.kuma.calculator.calculator;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
+
 public class NumPad {
 
+
+  private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
   /**
    * input is the value that the user enters via the keyboard and is shown on the calculator screen.
    */
-  private String input = "";
+  private StringBuilder input = new StringBuilder();
   /**
    * currentValue is the number that calculations are performed on with input. After a calculation
    * is done, currentValue will always be equal to the answer of the last calculation.
@@ -22,9 +27,18 @@ public class NumPad {
    * to repeat the last calculation.
    */
   private double equalsMemory;
+  /**
+   * This method is called when a PropertyChangeListener is added to the calculator.
+   * The listener gets called when one of the calculator's properties changes.
+   *
+   * @param listener
+   */
+  public void addPropertyChangeListener(PropertyChangeListener listener) {
+    pcs.addPropertyChangeListener(listener);
+  }
 
   public String getInput() {
-    return input;
+    return input.toString();
   }
 
   public String getCurrentValue() {
@@ -40,10 +54,12 @@ public class NumPad {
   }
 
   public void setInput(String input) {
-    this.input = input;
+    pcs.firePropertyChange("input", this.input.toString(), input);
+    this.input.replace(0, this.input.length(), input);
   }
 
   public void setCurrentValue(String currentValue) {
+    pcs.firePropertyChange("value", this.currentValue, currentValue);
     this.currentValue = currentValue;
   }
 
@@ -62,8 +78,10 @@ public class NumPad {
    * @param digit
    */
   public void inputDigit(String digit) {
-    if (!digit.equals(".") || (digit.equals(".") && !input.contains("."))) {
-      input = input.concat(digit);
+    if (!digit.equals(".") || (digit.equals(".") && !input.toString().contains("."))) {
+      String newInput = input.append(digit).toString();
+      pcs.firePropertyChange("input", input, newInput);
+      input.replace(0, input.length(), newInput);
     }
   }
 
@@ -72,11 +90,20 @@ public class NumPad {
    * input.
    */
   public void backspace() {
-    if (input.isEmpty()) {
-
-    } else {
-      input = input.substring(0, input.length() - 1);
+    if (!input.isEmpty()) {
+      String newInput = input.substring(0, input.length() - 1);
+      pcs.firePropertyChange("input", input, newInput);
+      input.replace(0, input.length(), newInput);
     }
   }
 
+  /**
+   * This method is called from Controller's cReset() method. setCurrentValue() is used to reset
+   * currentValue in order to trigger the actionListener and update the textField.
+   */
+  public void reset() {
+    input = new StringBuilder();
+    currentOperator = "";
+    setCurrentValue("");
+  }
 }

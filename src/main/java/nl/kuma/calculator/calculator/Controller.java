@@ -53,6 +53,23 @@ public class Controller {
   }
 
   /**
+   * This method checks if input is empty and if so sets the first digit of input to a "-" so you
+   * can calculate using negative numbers. If input is already set it will trigger selectOperator.
+   * If input is currently equal to only "-" the method doesn't do anything. This is to ensure that
+   * the calculator doesn't break upon consecutive presses of "-" without entering any numbers
+   * in between.
+   */
+  public void verifyMinus() {
+    if (numPad.getInput().isEmpty()) {
+      numPad.inputDigit("-");
+    } else if (numPad.getInput().equals("-")) {
+
+    } else {
+      selectOperator("-");
+    }
+  }
+
+  /**
    * This method parses relevant values to doubles and makes a calculation based on what
    * currentOperator is set to. There is a check to see if there is user input to make the method
    * decide if the calculation is going to happen with the current input, or with input from a
@@ -69,6 +86,7 @@ public class Controller {
       modifier = parsedInput;
     }
 
+    // checks which operator was last entered and performs calculation with that operator.
     double sum = switch(numPad.getCurrentOperator()) {
       case "+" -> parsedCurrentValue + modifier;
       case "-" -> parsedCurrentValue - modifier;
@@ -77,16 +95,19 @@ public class Controller {
       default -> parsedInput;
     };
 
-    numPad.setCurrentValue(Double.toString(sum));
+    // sets equalsMemory for calculation with continuous "=" presses, resets input variable
+    // for new user input and then sets currentValue equal to the answer to the performed
+    // calculation
     numPad.setEqualsMemory(modifier);
     numPad.setInput("");
+    numPad.setCurrentValue(Double.toString(sum));
   }
 
   /**
-   * This method replaces the current instance of cReset with a fresh one to reset the values.
+   * This method replaces the current instance of numPad with a fresh one to reset the values.
    */
   public void cReset() {
-    numPad = new NumPad();
+    numPad.reset();
   }
 
 }
