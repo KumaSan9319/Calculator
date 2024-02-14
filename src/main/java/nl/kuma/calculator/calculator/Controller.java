@@ -1,5 +1,7 @@
 package nl.kuma.calculator.calculator;
 
+import java.text.DecimalFormat;
+
 public class Controller {
 
   private NumPad numPad;
@@ -77,6 +79,8 @@ public class Controller {
    * calculation.
    */
   public void equals() {
+    DecimalFormat decimalFormat = new DecimalFormat("#");
+
     double parsedCurrentValue = Double.parseDouble(numPad.getCurrentValue());
     double parsedInput = 0;
     double modifier = numPad.getEqualsMemory();
@@ -101,6 +105,11 @@ public class Controller {
     numPad.setEqualsMemory(modifier);
     numPad.setInput("");
     numPad.setCurrentValue(Double.toString(sum));
+
+    // If sum ends in .0 the calculator will show the result without decimals.
+    if (numPad.getCurrentValue().endsWith(".0")) {
+      numPad.setCurrentValue(decimalFormat.format(sum));
+    }
   }
 
   /**

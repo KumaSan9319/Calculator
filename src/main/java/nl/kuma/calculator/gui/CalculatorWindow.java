@@ -4,6 +4,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
@@ -64,8 +65,10 @@ public class CalculatorWindow {
    * @param listener the action listener for the button
    * @return the created button
    */
-  private CalculatorButton createButton(String buttonName, ActionListener listener){
-    CalculatorButton button = new CalculatorButton(buttonName);
+  private JButton createButton(String buttonName, ActionListener listener){
+    JButton button = new JButton(buttonName);
+    button.setFont(new Font("Sans Serif", Font.PLAIN, 30));
+    button.setFocusable(false);
     button.addActionListener(listener);
     return button;
   }
@@ -79,7 +82,7 @@ public class CalculatorWindow {
 
     //add buttons
     for (String button : buttonNames) {
-      CalculatorButton calculatorButton = switch (button) {
+      JButton calculatorButton = switch (button) {
         case "+", "*", "/" -> createButton(button, (ActionEvent e) -> controller.selectOperator(button));
         case "-" -> createButton(button, (ActionEvent e) -> controller.verifyMinus());
         case "=" -> createButton(button, (ActionEvent e) -> controller.equals());
@@ -89,14 +92,14 @@ public class CalculatorWindow {
     }
 
     //add backspaceButton
-    CalculatorButton backspace = createButton("Backspace",
+    JButton backspace = createButton("Backspace",
         (ActionEvent e) -> controller.getNumPad().backspace());
     backspace.setBounds(40, 430, 145, 50);
     backspace.setFont(new Font("Sans Serif", Font.PLAIN, 20));
     frame.add(backspace);
 
     //add C button
-    CalculatorButton cButton = createButton("C",
+    JButton cButton = createButton("C",
         (ActionEvent e) -> controller.cReset());
     cButton.setBounds(195, 430, 145, 50);
     frame.add(cButton);
