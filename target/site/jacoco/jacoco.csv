@@ -1,0 +1,7 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+Calculator,nl.kuma.calculator.calculator,NumPad,5,150,2,6,2,33,3,14,1,12
+Calculator,nl.kuma.calculator.calculator,Controller,34,121,9,10,8,32,8,10,1,6
+Calculator,nl.kuma.calculator,Launcher,8,0,0,0,3,0,2,0,2,0
+Calculator,nl.kuma.calculator,Launcher.new Runnable() {...},8,0,0,0,3,0,2,0,2,0
+Calculator,nl.kuma.calculator.gui,CalculatorTextField,26,0,0,0,7,0,2,0,2,0
+Calculator,nl.kuma.calculator.gui,CalculatorWindow,311,0,6,0,48,0,16,0,12,0

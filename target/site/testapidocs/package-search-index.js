@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"nl.kuma.calculator.calculator"},{"l":"nl.kuma.calculator.gui"}];updateSearchResults();

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>NumPad.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Calculator</a> &gt; <a href="index.source.html" class="el_package">nl.kuma.calculator.calculator</a> &gt; <span class="el_source">NumPad.java</span></div><h1>NumPad.java</h1><pre class="source lang-java linenums">package nl.kuma.calculator.calculator;
+
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
+
+<span class="fc" id="L6">public class NumPad {</span>
+
+
+<span class="fc" id="L9">  private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);</span>
+  /**
+   * input is the value that the user enters via the keyboard and is shown on the calculator screen.
+   */
+<span class="fc" id="L13">  private StringBuilder input = new StringBuilder();</span>
+  /**
+   * currentValue is the number that calculations are performed on with input. After a calculation
+   * is done, currentValue will always be equal to the answer of the last calculation.
+   */
+<span class="fc" id="L18">  private String currentValue = &quot;&quot;;</span>
+  /**
+   * currentOperator is set when the &quot;+&quot;, &quot;-&quot;, &quot;*&quot; or &quot;/&quot; button is pressed on the keyboard.
+   */
+<span class="fc" id="L22">  private String currentOperator = &quot;&quot;;</span>
+
+  /**
+   * equalsMemory is a value that is set after a calculation is performed. When you press &quot;=&quot;
+   * repeatedly without entering any other input, this value makes it possible for the calculator
+   * to repeat the last calculation.
+   */
+  private double equalsMemory;
+  /**
+   * This method is called when a PropertyChangeListener is added to the calculator.
+   * The listener gets called when one of the calculator's properties changes.
+   *
+   * @param listener
+   */
+  public void addPropertyChangeListener(PropertyChangeListener listener) {
+<span class="nc" id="L37">    pcs.addPropertyChangeListener(listener);</span>
+<span class="nc" id="L38">  }</span>
+
+  public String getInput() {
+<span class="fc" id="L41">    return input.toString();</span>
+  }
+
+  public String getCurrentValue() {
+<span class="fc" id="L45">    return currentValue;</span>
+  }
+
+  public String getCurrentOperator() {
+<span class="fc" id="L49">    return currentOperator;</span>
+  }
+
+  public double getEqualsMemory() {
+<span class="fc" id="L53">    return equalsMemory;</span>
+  }
+
+  public void setInput(String input) {
+<span class="fc" id="L57">    pcs.firePropertyChange(&quot;input&quot;, this.input.toString(), input);</span>
+<span class="fc" id="L58">    this.input.replace(0, this.input.length(), input);</span>
+<span class="fc" id="L59">  }</span>
+
+  public void setCurrentValue(String currentValue) {
+<span class="fc" id="L62">    pcs.firePropertyChange(&quot;value&quot;, this.currentValue, currentValue);</span>
+<span class="fc" id="L63">    this.currentValue = currentValue;</span>
+<span class="fc" id="L64">  }</span>
+
+  public void setCurrentOperator(String currentOperator) {
+<span class="fc" id="L67">    this.currentOperator = currentOperator;</span>
+<span class="fc" id="L68">  }</span>
+
+  public void setEqualsMemory(double equalsMemory) {
+<span class="fc" id="L71">    this.equalsMemory = equalsMemory;</span>
+<span class="fc" id="L72">  }</span>
+
+  /**
+   * This method is called when the user presses a button on the keyboard representing a digit or
+   * the &quot;.&quot;. Its main use is to enter &quot;input&quot;.
+   *
+   * @param digit
+   */
+  public void inputDigit(String digit) {
+<span class="pc bpc" id="L81" title="1 of 6 branches missed.">    if (!digit.equals(&quot;.&quot;) || (digit.equals(&quot;.&quot;) &amp;&amp; !input.toString().contains(&quot;.&quot;))) {</span>
+<span class="fc" id="L82">      String newInput = input.append(digit).toString();</span>
+<span class="fc" id="L83">      pcs.firePropertyChange(&quot;input&quot;, input, newInput);</span>
+<span class="fc" id="L84">      input.replace(0, input.length(), newInput);</span>
+    }
+<span class="fc" id="L86">  }</span>
+
+  /**
+   * This method is called when the &quot;Backspace&quot; button is pressed and removes the last digit of
+   * input.
+   */
+  public void backspace() {
+<span class="pc bpc" id="L93" title="1 of 2 branches missed.">    if (!input.isEmpty()) {</span>
+<span class="fc" id="L94">      String newInput = input.substring(0, input.length() - 1);</span>
+<span class="fc" id="L95">      pcs.firePropertyChange(&quot;input&quot;, input, newInput);</span>
+<span class="fc" id="L96">      input.replace(0, input.length(), newInput);</span>
+    }
+<span class="fc" id="L98">  }</span>
+
+  /**
+   * This method is called from Controller's cReset() method. setCurrentValue() is used to reset
+   * currentValue in order to trigger the actionListener and update the textField.
+   */
+  public void reset() {
+<span class="fc" id="L105">    input = new StringBuilder();</span>
+<span class="fc" id="L106">    currentOperator = &quot;&quot;;</span>
+<span class="fc" id="L107">    setCurrentValue(&quot;&quot;);</span>
+<span class="fc" id="L108">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

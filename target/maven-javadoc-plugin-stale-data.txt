@@ -1,0 +1,46 @@
+@options
+@packages
+--class-path
+'C:/Users/Gebruiker/IdeaProjects/Java Cursus Hacklab/GlennChapter/Calculator/target/classes;C:/Users/Gebruiker/IdeaProjects/Java Cursus Hacklab/GlennChapter/Calculator/target/test-classes;C:/Users/Gebruiker/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar;C:/Users/Gebruiker/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar;C:/Users/Gebruiker/.m2/repository/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar;C:/Users/Gebruiker/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar;C:/Users/Gebruiker/.m2/repository/org/jacoco/jacoco-maven-plugin/0.8.11/jacoco-maven-plugin-0.8.11.jar;C:/Users/Gebruiker/.m2/repository/org/codehaus/plexus/plexus-utils/3.0.24/plexus-utils-3.0.24.jar;C:/Users/Gebruiker/.m2/repository/org/apache/maven/shared/file-management/3.1.0/file-management-3.1.0.jar;C:/Users/Gebruiker/.m2/repository/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.jar;C:/Users/Gebruiker/.m2/repository/commons-io/commons-io/2.11.0/commons-io-2.11.0.jar;C:/Users/Gebruiker/.m2/repository/org/apache/maven/reporting/maven-reporting-api/3.0/maven-reporting-api-3.0.jar;C:/Users/Gebruiker/.m2/repository/org/apache/maven/doxia/doxia-sink-api/1.0/doxia-sink-api-1.0.jar;C:/Users/Gebruiker/.m2/repository/org/jacoco/org.jacoco.agent/0.8.11/org.jacoco.agent-0.8.11-runtime.jar;C:/Users/Gebruiker/.m2/repository/org/jacoco/org.jacoco.core/0.8.11/org.jacoco.core-0.8.11.jar;C:/Users/Gebruiker/.m2/repository/org/ow2/asm/asm/9.6/asm-9.6.jar;C:/Users/Gebruiker/.m2/repository/org/ow2/asm/asm-commons/9.6/asm-commons-9.6.jar;C:/Users/Gebruiker/.m2/repository/org/ow2/asm/asm-tree/9.6/asm-tree-9.6.jar;C:/Users/Gebruiker/.m2/repository/org/jacoco/org.jacoco.report/0.8.11/org.jacoco.report-0.8.11.jar'
+-encoding
+'UTF-8'
+-protected
+-source
+'17'
+-sourcepath
+'C:/Users/Gebruiker/IdeaProjects/Java Cursus Hacklab/GlennChapter/Calculator/src/test/java'
+-author
+-bottom
+'Copyright &#169; 2024. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'C:/Users/Gebruiker/IdeaProjects/Java Cursus Hacklab/GlennChapter/Calculator/target/site/testapidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'Calculator 1.0-SNAPSHOT Test API'
+-use
+-version
+-windowtitle
+'Calculator 1.0-SNAPSHOT Test API'
+nl.kuma.calculator.calculator
+nl.kuma.calculator.gui
+C:\Users\Gebruiker\IdeaProjects\Java Cursus Hacklab\GlennChapter\Calculator\src\test\java = 1705312387830
+C:\Users\Gebruiker\IdeaProjects\Java Cursus Hacklab\GlennChapter\Calculator\target\site\testapidocs\allclasses-index.html = 1708095152839
+C:\Users\Gebruiker\IdeaProjects\Java Cursus Hacklab\GlennChapter\Calculator\target\site\testapidocs\allpackages-index.html = 1708095152856
+C:\Users\Gebruiker\IdeaProjects\Java Cursus Hacklab\GlennChapter\Calculator\target\site\testapidocs\element-list = 1708095152632
+C:\Users\Gebruiker\IdeaProjects\Java Cursus Hacklab\GlennChapter\Calculator\target\site\testapidocs\help-doc.html = 1708095152907
+C:\Users\Gebruiker\IdeaProjects\Java Cursus Hacklab\GlennChapter\Calculator\target\site\testapidocs\index-all.html = 1708095152889
+C:\Users\Gebruiker\IdeaProjects\Java Cursus Hacklab\GlennChapter\Calculator\target\site\testapidocs\index.html = 1708095152794
+C:\Users\Gebruiker\IdeaProjects\Java Cursus Hacklab\GlennChapter\Calculator\target\site\testapidocs\jquery-ui.overrides.css = 1708095152953
+C:\Users\Gebruiker\IdeaProjects\Java Cursus Hacklab\GlennChapter\Calculator\target\site\testapidocs\member-search-index.js = 1708095152869
+C:\Users\Gebruiker\IdeaProjects\Java Cursus Hacklab\GlennChapter\Calculator\target\site\testapidocs\module-search-index.js = 1708095152860
+C:\Users\Gebruiker\IdeaProjects\Java Cursus Hacklab\GlennChapter\Calculator\target\site\testapidocs\overview-summary.html = 1708095152895
+C:\Users\Gebruiker\IdeaProjects\Java Cursus Hacklab\GlennChapter\Calculator\target\site\testapidocs\overview-tree.html = 1708095152775
+C:\Users\Gebruiker\IdeaProjects\Java Cursus Hacklab\GlennChapter\Calculator\target\site\testapidocs\package-search-index.js = 1708095152863
+C:\Users\Gebruiker\IdeaProjects\Java Cursus Hacklab\GlennChapter\Calculator\target\site\testapidocs\script.js = 1708095152921
+C:\Users\Gebruiker\IdeaProjects\Java Cursus Hacklab\GlennChapter\Calculator\target\site\testapidocs\search.js = 1708095152927
+C:\Users\Gebruiker\IdeaProjects\Java Cursus Hacklab\GlennChapter\Calculator\target\site\testapidocs\stylesheet.css = 1708095152916
+C:\Users\Gebruiker\IdeaProjects\Java Cursus Hacklab\GlennChapter\Calculator\target\site\testapidocs\tag-search-index.js = 1708095152872
+C:\Users\Gebruiker\IdeaProjects\Java Cursus Hacklab\GlennChapter\Calculator\target\site\testapidocs\type-search-index.js = 1708095152866

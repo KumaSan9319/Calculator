@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Controller.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Calculator</a> &gt; <a href="index.source.html" class="el_package">nl.kuma.calculator.calculator</a> &gt; <span class="el_source">Controller.java</span></div><h1>Controller.java</h1><pre class="source lang-java linenums">package nl.kuma.calculator.calculator;
+
+import java.text.DecimalFormat;
+
+public class Controller {
+
+  private NumPad numPad;
+  private static Controller controllerInstance;
+
+<span class="fc" id="L10">  private Controller() {</span>
+<span class="fc" id="L11">    this.numPad = new NumPad();</span>
+<span class="fc" id="L12">  }</span>
+
+  public NumPad getNumPad() {
+<span class="fc" id="L15">    return numPad;</span>
+  }
+
+  /**
+   * We only need one instance of controller to make the calculator work, and we also want
+   * calculatorButton to have access to the methods inside of controller, which is why it is
+   * turned into a singleton.
+   *
+   * @return
+   */
+  public static Controller getControllerInstance() {
+<span class="fc bfc" id="L26" title="All 2 branches covered.">    if (controllerInstance == null) {</span>
+<span class="fc" id="L27">      controllerInstance = new Controller();</span>
+    }
+
+<span class="fc" id="L30">    return controllerInstance;</span>
+  }
+
+  /**
+   * This method sets currentOperator to the value of the operator button that was pressed. It then
+   * runs code based on the state of the other values of numPad. If currentValue is empty, this
+   * method simply sets its value to the current value of input and resets input to be empty. If
+   * there is already a currentValue but input is still empty, the method doesn't do anything other
+   * than setting the currentOperator. If both currentValue and input are set, this method calls
+   * equals() to make a calculation, so you can keep doing calculations without having to press the
+   * &quot;=&quot; button in between.
+   *
+   * @param operatorInput
+   */
+  public void selectOperator(String operatorInput) {
+<span class="fc" id="L45">    numPad.setCurrentOperator(operatorInput);</span>
+
+<span class="fc bfc" id="L47" title="All 2 branches covered.">    if (numPad.getCurrentValue().isEmpty()) {</span>
+<span class="fc" id="L48">      numPad.setCurrentValue(numPad.getInput());</span>
+<span class="fc" id="L49">      numPad.setInput(&quot;&quot;);</span>
+<span class="fc bfc" id="L50" title="All 2 branches covered.">    } else if (numPad.getInput().isEmpty()) {</span>
+
+    } else {
+<span class="fc" id="L53">      equals();</span>
+    }
+<span class="fc" id="L55">  }</span>
+
+  /**
+   * This method checks if input is empty and if so sets the first digit of input to a &quot;-&quot; so you
+   * can calculate using negative numbers. If input is already set it will trigger selectOperator.
+   * If input is currently equal to only &quot;-&quot; the method doesn't do anything. This is to ensure that
+   * the calculator doesn't break upon consecutive presses of &quot;-&quot; without entering any numbers
+   * in between.
+   */
+  public void verifyMinus() {
+<span class="nc bnc" id="L65" title="All 2 branches missed.">    if (numPad.getInput().isEmpty()) {</span>
+<span class="nc" id="L66">      numPad.inputDigit(&quot;-&quot;);</span>
+<span class="nc bnc" id="L67" title="All 2 branches missed.">    } else if (numPad.getInput().equals(&quot;-&quot;)) {</span>
+
+    } else {
+<span class="nc" id="L70">      selectOperator(&quot;-&quot;);</span>
+    }
+<span class="nc" id="L72">  }</span>
+
+  /**
+   * This method parses relevant values to doubles and makes a calculation based on what
+   * currentOperator is set to. There is a check to see if there is user input to make the method
+   * decide if the calculation is going to happen with the current input, or with input from a
+   * former calculation. This system exists so you can keep pressing &quot;=&quot; to repeat your last
+   * calculation.
+   */
+  public void equals() {
+<span class="fc" id="L82">    DecimalFormat decimalFormat = new DecimalFormat(&quot;#&quot;);</span>
+
+<span class="fc" id="L84">    double parsedCurrentValue = Double.parseDouble(numPad.getCurrentValue());</span>
+<span class="fc" id="L85">    double parsedInput = 0;</span>
+<span class="fc" id="L86">    double modifier = numPad.getEqualsMemory();</span>
+
+<span class="fc bfc" id="L88" title="All 2 branches covered.">    if (!numPad.getInput().isEmpty()) {</span>
+<span class="fc" id="L89">      parsedInput = Double.parseDouble(numPad.getInput());</span>
+<span class="fc" id="L90">      modifier = parsedInput;</span>
+    }
+
+    // checks which operator was last entered and performs calculation with that operator.
+<span class="pc bpc" id="L94" title="4 of 5 branches missed.">    double sum = switch(numPad.getCurrentOperator()) {</span>
+<span class="fc" id="L95">      case &quot;+&quot; -&gt; parsedCurrentValue + modifier;</span>
+<span class="nc" id="L96">      case &quot;-&quot; -&gt; parsedCurrentValue - modifier;</span>
+<span class="nc" id="L97">      case &quot;*&quot; -&gt; parsedCurrentValue * modifier;</span>
+<span class="nc" id="L98">      case &quot;/&quot; -&gt; parsedCurrentValue / modifier;</span>
+<span class="pc" id="L99">      default -&gt; parsedInput;</span>
+    };
+
+    // sets equalsMemory for calculation with continuous &quot;=&quot; presses, resets input variable
+    // for new user input and then sets currentValue equal to the answer to the performed
+    // calculation
+<span class="fc" id="L105">    numPad.setEqualsMemory(modifier);</span>
+<span class="fc" id="L106">    numPad.setInput(&quot;&quot;);</span>
+<span class="fc" id="L107">    numPad.setCurrentValue(Double.toString(sum));</span>
+
+    // If sum ends in .0 the calculator will show the result without decimals.
+<span class="pc bpc" id="L110" title="1 of 2 branches missed.">    if (numPad.getCurrentValue().endsWith(&quot;.0&quot;)) {</span>
+<span class="fc" id="L111">      numPad.setCurrentValue(decimalFormat.format(sum));</span>
+    }
+<span class="fc" id="L113">  }</span>
+
+  /**
+   * This method replaces the current instance of numPad with a fresh one to reset the values.
+   */
+  public void cReset() {
+<span class="fc" id="L119">    numPad.reset();</span>
+<span class="fc" id="L120">  }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>
